@@ -47,7 +47,7 @@ const Game = ({verifyLetter, pickedWord, pickedCategory, letters, guessedLetters
         <div>
             <p>Letras já utilizadas:</p>
             {wrongLetters.map((letter, i) => (
-                <span key={i}>{letter}, </span>
+                <span className="font-bold" key={i}>{letter}, </span>
             ))}
         </div>
     </div>
