@@ -19,3 +19,20 @@ body {
   background: linear-gradient(180deg, rgba(44, 155, 34, 1) 0%, rgba(0, 0, 0, 1) 110%);
   color: #FFF;
 }
+
+button {
+  background: #37d61f;
+  padding: 10px 45px;
+  border: 3px solid #fff;
+  border-radius: 25px;
+  height: 60px;
+  font-weight: bold;
+  font-size: 1.2em;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  opacity: 1;
+}
