@@ -21,13 +21,47 @@ const stages = [
 
 
 function App() {
-
   const [gameStage, setGameStage] = useState(stages[0].name);
   const [words] = useState(wordsList);
+
+  const [pickedWord, setPickedWord] = useState("");
+  const [pickedCategory, setPickedCategory] = useState("");
+  const [letters, setLetters] = useState([]);
+
+  const pickWordAndCategory = () => {
+    //escolhe uma categoria aleatória
+    const categories = Object.keys(words)
+    const category = categories[Math.floor(Math.random() *  Object.keys(categories).length)];
+
+    console.log(category);
+
+    // escolhe uma palavra aleatória
+    const word = words[category][Math.floor(Math.random() *  words[category].length)]
+
+    console.log(word);
+
+    return { word, category }
+  };
 
 
   // começar o jogo das palavras secretas
   const startGame = () => {
+    //escolher palavra e categoria
+    const {word, category} = pickWordAndCategory();
+
+    // array de letras separadas das palavras
+    let wordLetters = word.split("")
+
+    wordLetters = wordLetters.map((l) => l.toLowerCase());
+
+    console.log(wordLetters)
+    console.log(word, category)
+    
+    // setando estados
+    setPickedWord(word)
+    setPickedCategory(category)
+    setLetters(letters)
+
     setGameStage(stages[1].name)
   };
 
@@ -40,7 +74,7 @@ function App() {
   const retry = () => {
     setGameStage(stages[0].name)
   };
-  
+
   return (
     <div className='App'>
       {gameStage === "start" && <StartScreen startGame={startGame} />}
