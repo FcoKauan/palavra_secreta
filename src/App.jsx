@@ -35,24 +35,23 @@ function App() {
   const [guesses, setGuesses] = useState(guessesQty)
   const [score, setScore] = useState(0)
 
-  const pickWordAndCategory = () => {
+  const pickWordAndCategory = useCallback(() => {
     //escolhe uma categoria aleatória
     const categories = Object.keys(words)
     const category = categories[Math.floor(Math.random() *  Object.keys(categories).length)];
 
-    console.log(category);
-
     // escolhe uma palavra aleatória
     const word = words[category][Math.floor(Math.random() *  words[category].length)]
 
-    console.log(word);
-
     return { word, category }
-  };
+  }, [words]);
 
 
   // começar o jogo das palavras secretas
-  const startGame = () => {
+  const startGame = useCallback(() => {
+    // reiniciar todas as letras
+    clearLettersStates();
+
     //escolher palavra e categoria
     const {word, category} = pickWordAndCategory();
 
@@ -61,16 +60,13 @@ function App() {
 
     wordLetters = wordLetters.map((l) => l.toLowerCase());
 
-    console.log(wordLetters)
-    console.log(word, category)
-    
     // setando estados
     setPickedWord(word)
     setPickedCategory(category)
     setLetters(wordLetters)
 
     setGameStage(stages[1].name)
-  };
+  }, [pickWordAndCategory]);
 
   //processar as letras do input
   const verifyLetter = (letter) => {
@@ -95,11 +91,20 @@ function App() {
     }
   };
 
+  //reiniciar jogo
+  const retry = () => {
+    setScore(0)
+    setGuesses(guessesQty)
+    setGameStage(stages[0].name)
+  };
+
+  //limpar letters state
   const clearLettersStates = () => {
     setGuessedLetters([])
     setWrongLetters([])
   }
 
+  // verificando se as tentativas acabaram
   useEffect(() => {
     if(guesses <= 0){
       // reiniciar todo o estado
@@ -108,12 +113,20 @@ function App() {
       setGameStage(stages[2].name);
     }
   }, [guesses])
-  //reiniciar jogo
-  const retry = () => {
-    setScore(0)
-    setGuesses(guessesQty)
-    setGameStage(stages[0].name)
-  };
+
+  // verificando a vitória
+  useEffect(() => {
+    const uniqueLetters = [...new Set(letters)];
+
+    //condição de vitória
+    if (guessedLetters.length === uniqueLetters.length) {
+      //adicionar pontuação
+      setScore((actualScore) => (actualScore += 100));
+
+      //reinicia o jogo com a nova palavra
+      startGame();
+    }
+  }, [guessedLetters, letters, startGame]);
 
   return (
     <div className='App'>
