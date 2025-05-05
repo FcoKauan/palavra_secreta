@@ -18,11 +18,11 @@ const Game = ({verifyLetter, pickedWord, pickedCategory, letters, guessedLetters
     return (
     <div>
         <p>
-            <span className="font-bold">Pontuação: {score}</span>
+            <span className="font-bold text-[1.2em]">Pontuação: {score}</span>
         </p>
         <h1 className="text-[2.5em]">Adivinhe a palavra:</h1>
         <h3 className="mb-[1.2em]">Dica sobre a palavra: <span className="text-yellow-300 font-bold">{pickedCategory}</span></h3>
-        <p>Você ainda tem {guesses} tentativas</p>
+        <p>Você ainda tem {guesses} tentativa(s)</p>
 
         {/* word container */}
         <div className="m-[1.5em] p-[1.5em] border-[20px] border-yellow-300 flex">
