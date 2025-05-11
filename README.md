@@ -4,6 +4,10 @@ Projeto desenvolvido com o obejtivo de por em prática os conhecimetos adquirido
 
 ## Tecnologias utilizadas 🚀
   - HTML5
+<<<<<<< HEAD
+=======
+  - CSS3
+>>>>>>> 9fe3e5a3b7355e2bd132b3a93139719f882f6eb2
   - REACT
   - VITE
   - JavaScript
