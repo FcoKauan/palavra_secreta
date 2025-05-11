@@ -1,12 +1,21 @@
-# React + Vite
+# Jogo Web: Palavra Secreta 🎮
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto desenvolvido com o obejtivo de por em prática os conhecimetos adquiridos em REACT e TAILWIND. O jogo possibilita um experiência divertida e intuitiva com os jogadores. 
 
-Currently, two official plugins are available:
+## Tecnologias utilizadas 🚀
+  - HTML5
+  - REACT
+  - VITE
+  - JavaScript
+  - Node.js (para gerenciamento de pacotes via npm)
+  - Git
+  - Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Tela de início 💻
+![Tela de início](https://github.com/user-attachments/assets/af2ec0f3-cc9a-4f35-8fec-43c690273b55)
 
-## Expanding the ESLint configuration
+### Tela de jogabilidade 💻
+![Tela de jogabilidade](https://github.com/user-attachments/assets/e7594280-4bdd-429c-b80a-7f00ed0521c3)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Tela de fim de jogo 💻
+![Tela de Fim de jogo](https://github.com/user-attachments/assets/d6f677e2-e630-4c97-9663-707473a9d16b)

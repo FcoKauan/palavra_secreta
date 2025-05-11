@@ -19,9 +19,6 @@ const stages = [
   {id: 3, name: "end"},
 ];
 
-const guessesQty = 5
-
-
 function App() {
   const [gameStage, setGameStage] = useState(stages[0].name);
   const [words] = useState(wordsList);
@@ -30,20 +27,20 @@ function App() {
   const [pickedCategory, setPickedCategory] = useState("");
   const [letters, setLetters] = useState([]);
 
-  const [guessedLetters, setGuessedLetters] = useState([])
-  const [wrongLetters, setWrongLetters] = useState([])
-  const [guesses, setGuesses] = useState(guessesQty)
-  const [score, setScore] = useState(0)
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [wrongLetters, setWrongLetters] = useState([]);
+  const [guesses, setGuesses] = useState(5);
+  const [score, setScore] = useState(0);
 
   const pickWordAndCategory = useCallback(() => {
     //escolhe uma categoria aleatória
-    const categories = Object.keys(words)
+    const categories = Object.keys(words);
     const category = categories[Math.floor(Math.random() *  Object.keys(categories).length)];
 
     // escolhe uma palavra aleatória
     const word = words[category][Math.floor(Math.random() *  words[category].length)]
 
-    return { word, category }
+    return { category, word }
   }, [words]);
 
 
@@ -53,16 +50,16 @@ function App() {
     clearLettersStates();
 
     //escolher palavra e categoria
-    const {word, category} = pickWordAndCategory();
+    const {category, word} = pickWordAndCategory();
 
     // array de letras separadas das palavras
-    let wordLetters = word.split("")
+    let wordLetters = word.split("");
 
     wordLetters = wordLetters.map((l) => l.toLowerCase());
 
     // setando estados
-    setPickedWord(word)
     setPickedCategory(category)
+    setPickedWord(word)
     setLetters(wordLetters)
 
     setGameStage(stages[1].name)
@@ -70,7 +67,7 @@ function App() {
 
   //processar as letras do input
   const verifyLetter = (letter) => {
-    const normalizedLetter = letter.toLowerCase()
+    const normalizedLetter = letter.toLowerCase();
 
     //checar se a letra ja foi utilizada de alguma maneira
     if (guessedLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)) {
@@ -80,61 +77,63 @@ function App() {
     // coloca a letra adivinhada ou remove uma chance
     if(letters.includes(normalizedLetter)) {
       setGuessedLetters((actualGuessedLetters) => [
-        ...actualGuessedLetters, normalizedLetter
-      ])
+        ...actualGuessedLetters, letter,
+      ]);
     } else {
       setWrongLetters((actualWrongLetters) => [
-        ...actualWrongLetters, normalizedLetter
-      ])
+        ...actualWrongLetters, normalizedLetter,
+      ]);
 
-      setGuesses((actualGuesses) => actualGuesses -1)
+      setGuesses((actualGuesses) => actualGuesses - 1)
     }
   };
 
   //reiniciar jogo
   const retry = () => {
-    setScore(0)
-    setGuesses(guessesQty)
-    setGameStage(stages[0].name)
+    setScore(0);
+    setGuesses(5);
+    setGameStage(stages[0].name);
   };
 
   //limpar letters state
   const clearLettersStates = () => {
-    setGuessedLetters([])
-    setWrongLetters([])
-  }
+    setGuessedLetters([]);
+    setWrongLetters([]);
+  };
 
   // verificando se as tentativas acabaram
   useEffect(() => {
-    if(guesses <= 0){
+    if(guesses === 0){
       // reiniciar todo o estado
-      clearLettersStates()
+      clearLettersStates();
 
       setGameStage(stages[2].name);
     }
-  }, [guesses])
+  }, [guesses]);  
 
   // verificando a vitória
   useEffect(() => {
+    if(gameStage !== "game") return;
+
     const uniqueLetters = [...new Set(letters)];
 
     //condição de vitória
     if (guessedLetters.length === uniqueLetters.length) {
       //adicionar pontuação
-      setScore((actualScore) => (actualScore += 100));
+      setScore((actualScore) => (actualScore + 100));
 
       //reinicia o jogo com a nova palavra
       startGame();
     }
-  }, [guessedLetters, letters, startGame]);
+  }, [guessedLetters, letters, startGame, gameStage]);
 
   return (
     <div className='App'>
       {gameStage === "start" && <StartScreen startGame={startGame} />}
-      {gameStage === "game" && <Game verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessedLetters={guessedLetters} wrongLetters={wrongLetters} guesses={guesses} score={score} />}
+      {gameStage === "game" && (<Game verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessedLetters={guessedLetters} wrongLetters={wrongLetters} guesses={guesses} score={score} />)}
       {gameStage === "end" && <GameOver retry={retry} score={score}/>}
     </div>
-  )
+  );
 }
 
 export default App

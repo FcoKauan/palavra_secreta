@@ -1,4 +1,4 @@
-const StartScreen = ({ startGame }) => {
+const GameStart = ({ startGame }) => {
   return (
     <div>
         <h1 className="text-[3.5em] font-bold"> Palavra Secreta </h1>
@@ -8,4 +8,4 @@ const StartScreen = ({ startGame }) => {
   )
 }
 
-export default StartScreen
+export default GameStart;
