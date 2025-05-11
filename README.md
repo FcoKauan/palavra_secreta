@@ -2,18 +2,16 @@
 
 Projeto desenvolvido com o obejtivo de por em prática os conhecimetos adquiridos em REACT e TAILWIND. O jogo possibilita um experiência divertida e intuitiva com os jogadores. 
 
+<p> Para acessar o site: <a href="https://palavra-secreta-nmcte7pj0-francisco-kauans-projects.vercel.app/"> CLIQUE AQUI!</a></p>
+
 ## Tecnologias utilizadas 🚀
   - HTML5
-<<<<<<< HEAD
-=======
-  - CSS3
->>>>>>> 9fe3e5a3b7355e2bd132b3a93139719f882f6eb2
   - REACT
   - VITE
+  - Tailwind CSS
   - JavaScript
   - Node.js (para gerenciamento de pacotes via npm)
   - Git
-  - Tailwind CSS
 
 ### Tela de início 💻
 ![Tela de início](https://github.com/user-attachments/assets/af2ec0f3-cc9a-4f35-8fec-43c690273b55)
