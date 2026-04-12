@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 const Game = ({
   verifyLetter,
   pickedCategory,
-  pickedWord,
   letters,
   guessedLetters,
   wrongLetters,
@@ -32,12 +31,16 @@ const Game = ({
         </span>
         : {score}
       </p>
-      <h1 className="mt-[0.8em] mb-[0.8em] text-[1.5em] md:text-[2.5em]">Adivinhe a palavra:</h1>
+      <h1 className="mt-[0.8em] mb-[0.8em] text-[1.5em] md:text-[2.5em]">
+        Adivinhe a palavra:
+      </h1>
       <h3 className="mb-[1.2em] text-[0.7em] md:text-[1.2em]">
         Dica sobre a palavra:{" "}
         <span className="text-yellow-300 font-bold">{pickedCategory}</span>
       </h3>
-      <p className="text-[0.7em] md:text-[1.2em]">Você ainda tem {guesses} tentativa(s)</p>
+      <p className="text-[0.7em] md:text-[1.2em]">
+        Você ainda tem {guesses} tentativa(s)
+      </p>
 
       {/* word container */}
       <div className="m-[1.5em] p-[0.5em] sm:p-[0.8em] md:p-[1.5em] border-[10px]  md:border-[20px] border-yellow-300 flex flex-wrap justify-center">
@@ -60,7 +63,9 @@ const Game = ({
 
       {/* letter container */}
       <div className="mb-[1.2em]">
-        <p className="mb-[1.2em] text-[0.7em] md:text-[1.2em]">Tente adivinhar uma letra da palavra: </p>
+        <p className="mb-[1.2em] text-[0.7em] md:text-[1.2em]">
+          Tente adivinhar uma letra da palavra:{" "}
+        </p>
         <form
           className="flex items-center justify-center"
           onSubmit={handleSubmit}
@@ -70,14 +75,22 @@ const Game = ({
             type="text"
             name="letter"
             maxLength="1"
-            onChange={(e) => setLetter(e.target.value)}
+            onChange={(e) => {
+              const normalizedLetter = e.target.value.toLowerCase();
+              setLetter(normalizedLetter);
+            }}
             required
             value={letter}
             ref={letterInputRef}
           />
-          <button className="h-[50px] pt-[24px] sm:pr-[24px] sm:pb-[2px] sm:pl-[24px]
+          <button
+            className="h-[50px] pt-[24px] sm:pr-[24px] sm:pb-[2px] sm:pl-[24px]
          sm:h-[60px] sm:pt-[10px] sm:pr-[45px] sm:pb-[10px] sm:pl-[45px] sm:text-[1.2em] 
-         text-[0.8em]"> Jogar! </button>
+         text-[0.8em]"
+          >
+            {" "}
+            Jogar!{" "}
+          </button>
         </form>
       </div>
       {/*  wrong letters container*/}
